@@ -1,0 +1,136 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <ctime>
+#include <cstdlib>
+using namespace std ;
+
+int main() {
+
+string playerInput ; 
+
+vector < string > names ; 
+vector <string> :: iterator changeIter ;
+vector <string> :: const_iterator readIter ;
+  
+    names.push_back("Marcus") ;
+    names.push_back("Ciera") ; 
+    names.push_back("Bella") ;
+    names.push_back("Addy") ;
+    names.push_back("Finn") ;
+    names.push_back("Ducky") ;
+    names.push_back("Clayton") ;
+    names.push_back("Phil") ;
+
+    cout << "Here is a list of the names \n";
+    cout << "you have to work with.\n";
+    cout << endl ;
+      for( int i = 0 ; i < names.size() ; i ++ ){
+      cout<< i + 1 << ". " << names[i] << endl ;
+      } 
+    cout << endl ;
+    cout << "Here are your options:" << endl ;
+    cout << "1: to add a name, enter 'add'" << endl ;
+    cout << "2: to change name, enter 'change'" << endl ;
+    cout << "3: to remove a name, enter 'remove'" << endl ;
+    cout << "4: to list the names, enter 'list'" << endl;
+    cout << "5: to clear the entire list, enter 'clear'" << endl ;
+    cout << "6: to quit, enter 'quit'" << endl;
+    cout << endl ;
+
+    do{
+    cout << endl ;
+    cout << "What would you like to do:" << endl ;
+    cout << endl ;
+    cin >> playerInput ; 
+    cout << endl ;
+
+
+      if(playerInput == "add"){
+        cout<<"What name would you like to add?" << endl;
+        string newName ; 
+        cin >> newName ; 
+        names.push_back(newName) ;
+        cout << endl ;
+      }
+
+      else if (playerInput == "change"){
+        cout << "Which name would you like to change?" << endl ;
+        string oldName ;
+        cin >> oldName ;
+        changeIter = find( names.begin () , names.end() , oldName) ;
+        
+          if(changeIter != names.end()){
+            oldName = (*changeIter) ;
+            cout<< "What would you like to change " << (*changeIter) << " to?" << endl ;
+            string newName ;
+            cin >> newName ;
+            (*changeIter) = newName ;
+              for( int i = 0 ; i < names.size() ; i ++ ){
+              cout<< i + 1 << ". " << names[i] << endl ;
+              }
+            } 
+            else{
+              cout << "Thats not a name on my list, try again."
+              << endl ;
+            }
+          }  
+
+      else if (playerInput == "remove"){
+        cout << "Which name would you like to remove?" << endl ;
+        cout<< endl;
+        string delName ;
+        cin >> delName ;
+        changeIter = find(names.begin() , names.end() , delName) ;
+          
+          if(changeIter != names.end()) {
+            delName = (*changeIter) ;
+            names.erase(changeIter);
+            cout << endl ;
+            cout << "Found and deleted that name." << endl ;
+              for( int i = 0 ; i < names.size() ; i ++ ){
+                cout << i + 1 << ": " << names[i] << endl ;
+                }
+            }
+          
+          else{
+            cout << endl ;
+            cout<< "That's not one of the names, try again\nor try another option." << endl;
+          }
+
+          cout << endl ;        
+    
+      }
+    
+
+      else if (playerInput == "list"){
+        cout << "Here are the names in your list:" << endl ;
+        for(int i = 0 ; i <names.size() ; i ++ ){
+          cout << i + 1 << ". " << names[i] << endl ;
+          }
+      }
+
+      else if (playerInput == "clear"){
+        names.clear() ;
+          if (names.empty()){
+            cout << "No more names in the list, try adding one... \nFine enter 'list' if you don't believe me!" << endl; 
+          }
+
+          else{
+            cout << "The names are still there, try agin!!" << endl ;
+          }
+      
+      }
+      else if (playerInput == "quit"){
+          cout << "Have a good day!" << endl ;
+          return 0 ;
+        }
+      else {
+        cout << "That's not one of the options, why don't we try that again!" << endl ;
+      } 
+    } while (playerInput != "quit" || playerInput != "Quit") ;
+
+    return 0 ;
+
+}
